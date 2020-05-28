@@ -17,6 +17,7 @@
     <div>
         <label>Enter period in months: <form:input path="type"/></label>
     </div>
+    <input type="submit" value="Save">
 </form:form>
 </body>
 </html>

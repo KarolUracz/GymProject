@@ -30,8 +30,8 @@ public class User {
     private String lastName;
     private String email;
     private String address;
-    @OneToOne
-    private Pass pass;
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<Pass> pass;
 
     @PrePersist
     public void prePersist() {

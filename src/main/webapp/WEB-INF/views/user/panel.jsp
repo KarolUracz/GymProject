@@ -15,8 +15,9 @@
         <th>Pass valid till</th>
     </tr>
     <tr>
-        <td>${user.user.pass.type} months</td>
-        <td>${user.user.pass.endDate}</td>
+        <td><c:forEach items="${user.user.pass}" var="pass">
+            ${pass.type} months
+        </c:forEach> months</td>
     </tr>
 </table>
 <div>Buy gym pass:</div>

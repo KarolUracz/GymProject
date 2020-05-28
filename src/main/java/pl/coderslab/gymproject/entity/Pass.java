@@ -6,8 +6,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.Month;
-import java.time.temporal.ChronoUnit;
 
 @Entity
 @Getter
@@ -20,12 +18,14 @@ public class Pass {
     private Integer type;
     private LocalDate startDate;
     private LocalDate endDate;
+    @ManyToOne
+    private User user;
 
-    @PrePersist
-    public void prePersist() {
-        startDate = LocalDate.now();
-        endDate = startDate.plus(type, ChronoUnit.MONTHS);
-    }
+//    @PrePersist
+//    public void prePersist() {
+//        startDate = LocalDate.now();
+//        endDate = startDate.plus(type, ChronoUnit.MONTHS);
+//    }
 
 
 }

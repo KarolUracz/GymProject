@@ -11,6 +11,7 @@ import pl.coderslab.gymproject.fixture.InitDataFixture;
 import pl.coderslab.gymproject.interfaces.PassService;
 import pl.coderslab.gymproject.interfaces.UserService;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -69,7 +70,7 @@ public class UserController {
     @GetMapping("/getPass/{id}")
     public String getPass(@PathVariable long id, @AuthenticationPrincipal CurrentUser currentUser){
         Pass byId = passService.findById(id);
-        currentUser.getUser().setPass(byId);
+        currentUser.getUser().getPass().add(byId);
         return "/user/panel";
     }
 
