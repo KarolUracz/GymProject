@@ -31,4 +31,17 @@ public class User {
     )
     private Set<Role> roles;
 
+    private String firstName;
+
+    private String lastName;
+
+    private String email;
+
+    private String address;
+
+    @PrePersist
+    public void prePersist(){
+        this.email = username;
+    }
+
 }

@@ -9,6 +9,7 @@ import pl.coderslab.gymproject.repository.RoleRepository;
 import pl.coderslab.gymproject.repository.UserRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService{
@@ -41,5 +42,10 @@ public class UserServiceImpl implements UserService{
             user.setRoles(roles);
         }
         userRepository.save(user);
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 }

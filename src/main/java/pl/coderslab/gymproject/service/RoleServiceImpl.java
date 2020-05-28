@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.interfaces.RoleService;
 import pl.coderslab.gymproject.repository.RoleRepository;
+
+import java.util.List;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -23,5 +26,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findOneByName(String roleName) {
         return this.roleRepository.findOneByName(roleName);
+    }
+
+    @Override
+    public List<Role> findAll() {
+        return this.roleRepository.findAll();
     }
 }

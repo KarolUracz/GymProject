@@ -6,6 +6,7 @@
 </head>
 <body>
     <h1>HomePage</h1>
-
+<a href="/panel">Log in</a>
+<a href="/form">Sign up</a>
 </body>
 </html>
