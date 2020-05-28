@@ -57,16 +57,35 @@ public class UserServiceImpl implements UserService{
     @Override
     public void updateUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        if(user.getRoles() == null || user.getRoles().size()==0) {
-            Set<Role> roles = new HashSet<>();
-            roles.add(roleRepository.findOneByName("ROLE_USER"));
-            user.setRoles(roles);
-        }
         userRepository.save(user);
     }
 
     @Override
     public void delete(long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public void saveAdmin(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(1);
+        if(user.getRoles() == null || user.getRoles().size()==0) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findOneByName("ROLE_ADMIN"));
+            user.setRoles(roles);
+        }
+        userRepository.save(user);
+    }
+
+    @Override
+    public void saveTrainer(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(1);
+        if(user.getRoles() == null || user.getRoles().size()==0) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findOneByName("ROLE_TRAINER"));
+            user.setRoles(roles);
+        }
+        userRepository.save(user);
     }
 }

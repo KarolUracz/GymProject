@@ -8,31 +8,35 @@
 </head>
 <body>
 <p> You are logged as: ${user.user.firstName}</p>
-
-<table>
-    <tr>
-        <th>Pass type</th>
-        <th>Pass valid till</th>
-    </tr>
-    <tr>
-        <td><c:forEach items="${user.user.pass}" var="pass">
-            ${pass.type} months
-        </c:forEach> months</td>
-    </tr>
-</table>
-<div>Buy gym pass:</div>
-<c:forEach items="${passes}" var="pass">
-    ${pass.type} months <a href="/user/getPass/${pass.id}">Buy</a>
-</c:forEach>
-    <nav>
-        <sec:authorize access="isAuthenticated()">
-            <form action="<c:url value="/logout"/>" method="post">
-                <input type="submit" value="Wyloguj">
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            </form>
-        </sec:authorize>
-    </nav>
-
+<c:if test="${user.user.pass.size() > 0}">
+    ${user.user.pass.size()}
+    <table>
+        <tr>
+            <th>Pass type</th>
+            <th>Pass valid till</th>
+        </tr>
+        <tr>
+            <td><c:forEach items="${user.user.pass}" var="pass">
+                ${pass.type} months
+            </c:forEach> months
+            </td>
+        </tr>
+    </table>
+</c:if>
+<c:if test="${user.user.pass.size() = 0}">
+    <div>Buy gym pass:</div>
+    <c:forEach items="${passes}" var="pass">
+        ${pass.type} months <a href="/user/getPass/${pass.id}">Buy</a>
+    </c:forEach>
+</c:if>
+<nav>
+    <sec:authorize access="isAuthenticated()">
+        <form action="<c:url value="/logout"/>" method="post">
+            <input type="submit" value="Wyloguj">
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </sec:authorize>
+</nav>
 
 
 </body>

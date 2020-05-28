@@ -1,11 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Raider
-  Date: 2020-05-28
-  Time: 09:23
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -39,7 +32,9 @@
     </tr>
 </c:forEach>
 </table>
-<div><a href="/admin/addPass">Add pass</a></div>
-<div><a href="/admin/addUser">Add user</a></div>
+<p><a href="/admin/addPass">Add pass</a></p>
+<p><a href="/admin/addUser">Add user</a></p>
+<p><a href="/admin/addAdmin">Add admin</a></p>
+<p><a href="/admin/addTrainer">Add trainer</a></p>
 </body>
 </html>

@@ -13,4 +13,6 @@ public interface UserService {
     User findById(long id);
     void updateUser(User user);
     void delete(long id);
+    void saveAdmin(User user);
+    void saveTrainer(User user);
 }

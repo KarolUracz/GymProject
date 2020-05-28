@@ -1,21 +1,16 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Raider
-  Date: 2020-05-28
-  Time: 12:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>User edition</title>
+    <title>Trainer add</title>
 </head>
 <body>
-<form:form method="post" action="/admin/edit" modelAttribute="user">
+<form:form modelAttribute="user" method="post" action="/admin/addTrainer">
     <form:hidden path="id"/>
-    <form:hidden path="username"/>
-    <form:hidden path="password"/>
+    <div>
+        <label>Enter Your email: <form:input path="username"/></label>
+        <form:errors path="username"/>
+    </div>
     <div>
         <label>Enter Your name: <form:input path="firstName"/></label>
         <form:errors path="firstName"/>
@@ -27,6 +22,13 @@
     <div>
         <label>Enter Your address: <form:input path="address"/></label>
         <form:errors path="address"/>
+    </div>
+    <div>
+        <label>Set Your password: <form:password path="password"/></label>
+        <form:errors path="password"/>
+    </div>
+    <div>
+        <label>Set role: <form:select path="roles" items="${roles}" itemLabel="name" itemValue="id"/></label>
     </div>
     <input type="submit" value="Confirm">
 </form:form>

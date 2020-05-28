@@ -5,7 +5,7 @@
     <title>User form</title>
 </head>
 <body>
-<form:form method="post" action="/user/form" modelAttribute="user">
+<form:form method="post" modelAttribute="user">
     <form:hidden path="id"/>
     <div>
         <label>Enter Your email: <form:input path="username"/></label>

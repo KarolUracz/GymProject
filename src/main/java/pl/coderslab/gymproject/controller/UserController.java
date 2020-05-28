@@ -59,7 +59,7 @@ public class UserController {
     @PostMapping("/form")
     public String save(@ModelAttribute User user) {
         userService.saveUser(user);
-        return "/user/panel";
+        return "home";
     }
 
     @ModelAttribute(name = "passes")
