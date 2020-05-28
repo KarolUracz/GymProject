@@ -33,6 +33,18 @@
 </c:forEach>
 </table>
 <p><a href="/admin/addPass">Add pass</a></p>
+<table>
+    <tr>
+        <th>Pass type</th>
+        <th>Action</th>
+    </tr>
+    <c:forEach items="${passes}" var="pass">
+        <tr>
+            <td>${pass.type} months</td>
+            <td><a href="/admin/passDelete/${pass.id}">Delete</a></td>
+        </tr>
+    </c:forEach>
+</table>
 <p><a href="/admin/addUser">Add user</a></p>
 <p><a href="/admin/addAdmin">Add admin</a></p>
 <p><a href="/admin/addTrainer">Add trainer</a></p>

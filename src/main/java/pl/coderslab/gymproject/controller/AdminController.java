@@ -1,6 +1,5 @@
 package pl.coderslab.gymproject.controller;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +77,12 @@ public class AdminController {
         return "/admin/addPass";
     }
 
+    @PostMapping("/addPass")
+    public String addPass(@ModelAttribute Pass pass) {
+        passService.savePass(pass);
+        return "redirect:/admin/panel";
+    }
+
     @GetMapping("/addAdmin")
     public String addAdmin(Model model){
         model.addAttribute("user", new User());
@@ -99,6 +104,17 @@ public class AdminController {
     @PostMapping("/addTrainer")
     public String addTrainer(@ModelAttribute User user){
         userService.saveTrainer(user);
+        return "redirect:/admin/panel";
+    }
+
+    @ModelAttribute(name = "passes")
+    public List<Pass> getAll(){
+        return passService.getAll();
+    }
+
+    @GetMapping("/passDelete/{id}")
+    public String deletePass(@PathVariable long id){
+        passService.delete(id);
         return "redirect:/admin/panel";
     }
 }

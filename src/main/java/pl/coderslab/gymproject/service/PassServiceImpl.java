@@ -24,4 +24,14 @@ public class PassServiceImpl implements PassService {
     public Pass findById(long id) {
         return passRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void savePass(Pass pass) {
+        passRepository.save(pass);
+    }
+
+    @Override
+    public void delete(long id) {
+        passRepository.delete(passRepository.findById(id).orElse(null));
+    }
 }
