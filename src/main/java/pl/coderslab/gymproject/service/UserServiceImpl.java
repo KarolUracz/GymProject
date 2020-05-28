@@ -48,4 +48,25 @@ public class UserServiceImpl implements UserService{
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public User findById(long id) {
+        return userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if(user.getRoles() == null || user.getRoles().size()==0) {
+            Set<Role> roles = new HashSet<>();
+            roles.add(roleRepository.findOneByName("ROLE_USER"));
+            user.setRoles(roles);
+        }
+        userRepository.save(user);
+    }
+
+    @Override
+    public void delete(long id) {
+        userRepository.deleteById(id);
+    }
 }

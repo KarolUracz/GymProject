@@ -2,9 +2,7 @@ package pl.coderslab.gymproject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.RoleService;
@@ -43,5 +41,29 @@ public class AdminController {
     @ModelAttribute(name = "roles")
     public List<Role> getRoles(){
         return roleService.findAll();
+    }
+
+    @PostMapping("/addUser")
+    public String save(@ModelAttribute User user){
+        userService.saveUser(user);
+        return "redirect:/admin/panel";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable long id, Model model) {
+        model.addAttribute("user", userService.findById(id));
+        return "/editUser";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@ModelAttribute User user){
+        userService.updateUser(user);
+        return "redirect:/admin/panel";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable long id){
+        userService.delete(id);
+        return "redirect:/admin/panel";
     }
 }
