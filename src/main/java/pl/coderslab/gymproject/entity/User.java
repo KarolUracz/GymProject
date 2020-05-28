@@ -15,14 +15,10 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     @Column(nullable = false, unique = true, length = 60)
     private String username;
-
     private String password;
-
     private int enabled;
-
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
@@ -30,17 +26,15 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
-
     private String firstName;
-
     private String lastName;
-
     private String email;
-
     private String address;
+    @OneToOne
+    private Pass pass;
 
     @PrePersist
-    public void prePersist(){
+    public void prePersist() {
         this.email = username;
     }
 

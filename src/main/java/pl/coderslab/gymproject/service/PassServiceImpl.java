@@ -1,0 +1,27 @@
+package pl.coderslab.gymproject.service;
+
+import org.springframework.stereotype.Service;
+import pl.coderslab.gymproject.entity.Pass;
+import pl.coderslab.gymproject.interfaces.PassService;
+import pl.coderslab.gymproject.repository.PassRepository;
+
+import java.util.List;
+
+@Service
+public class PassServiceImpl implements PassService {
+    private PassRepository passRepository;
+
+    public PassServiceImpl(PassRepository passRepository) {
+        this.passRepository = passRepository;
+    }
+
+    @Override
+    public List<Pass> getAll() {
+        return passRepository.findAll();
+    }
+
+    @Override
+    public Pass findById(long id) {
+        return passRepository.findById(id).orElse(null);
+    }
+}

@@ -39,6 +39,7 @@
     </tr>
 </c:forEach>
 </table>
+<div><a href="/admin/addPass">Add pass</a></div>
 <div><a href="/admin/addUser">Add user</a></div>
 </body>
 </html>

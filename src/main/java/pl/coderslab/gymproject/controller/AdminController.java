@@ -3,8 +3,10 @@ package pl.coderslab.gymproject.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.gymproject.entity.Pass;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
+import pl.coderslab.gymproject.interfaces.PassService;
 import pl.coderslab.gymproject.interfaces.RoleService;
 import pl.coderslab.gymproject.interfaces.UserService;
 
@@ -16,10 +18,12 @@ public class AdminController {
 
     private UserService userService;
     private RoleService roleService;
+    private PassService passService;
 
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService, PassService passService) {
         this.userService = userService;
         this.roleService = roleService;
+        this.passService = passService;
     }
 
     @GetMapping("/panel")
@@ -65,5 +69,11 @@ public class AdminController {
     public String delete(@PathVariable long id){
         userService.delete(id);
         return "redirect:/admin/panel";
+    }
+
+    @GetMapping("/addPass")
+    public String addPass(Model model){
+        model.addAttribute("pass", new Pass());
+        return "/admin/addPass";
     }
 }
