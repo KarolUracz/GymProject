@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.repository.PassRepository;
 import pl.coderslab.gymproject.repository.RoleRepository;
 import pl.coderslab.gymproject.repository.UserRepository;
 
@@ -16,15 +17,17 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final PassRepository passRepository;
 
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
-            BCryptPasswordEncoder passwordEncoder
-    ) {
+            BCryptPasswordEncoder passwordEncoder,
+            PassRepository passRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.passRepository = passRepository;
     }
 
     @Override
@@ -56,7 +59,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void updateUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User userFromDb = userRepository.getOne(user.getId());
+        user.setPassword(userFromDb.getPassword());
         userRepository.save(user);
     }
 
@@ -88,4 +92,13 @@ public class UserServiceImpl implements UserService{
         }
         userRepository.save(user);
     }
+
+//    @Override
+//    public void extendPass(long userId, long passId) {
+//        User user = userRepository.getOne(userId);
+//        Set<Pass> passes = user.getPasses();
+//        passes.remove(passRepository.getOne(passId));
+//        Pass pass = passRepository.getOne(passId);
+//        pass.;
+//    }
 }

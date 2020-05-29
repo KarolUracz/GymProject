@@ -5,21 +5,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class Pass {
+public class PassType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    @ManyToOne
-    private User user;
-    @ManyToOne
-    private PassType passType;
-
+    private String name;
+    private Integer period;
+    @OneToMany(mappedBy = "passType")
+    private Set<Pass> passes;
 }

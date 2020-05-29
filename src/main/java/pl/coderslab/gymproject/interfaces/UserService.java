@@ -1,7 +1,6 @@
 package pl.coderslab.gymproject.interfaces;
 
 import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.repository.UserRepository;
 
 import java.util.List;
 
@@ -15,4 +14,5 @@ public interface UserService {
     void delete(long id);
     void saveAdmin(User user);
     void saveTrainer(User user);
+//    void extendPass(long id);
 }

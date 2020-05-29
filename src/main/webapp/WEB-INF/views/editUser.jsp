@@ -15,8 +15,7 @@
 <form:form method="post" action="/admin/edit" modelAttribute="user">
     <form:hidden path="id"/>
     <form:hidden path="username"/>
-    <form:hidden path="password"/>
-    <div>
+        <div>
         <label>Enter Your name: <form:input path="firstName"/></label>
         <form:errors path="firstName"/>
     </div>

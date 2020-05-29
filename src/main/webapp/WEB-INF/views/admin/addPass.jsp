@@ -12,10 +12,13 @@
     <title>Pass add</title>
 </head>
 <body>
-<form:form modelAttribute="pass" method="post" action="/admin/addPass">
+<form:form modelAttribute="passType" method="post" action="/admin/addPass">
     <form:hidden path="id"/>
     <div>
-        <label>Enter period in months: <form:input path="type"/></label>
+        <label>Enter name: <form:input path="name"/></label>
+    </div>
+    <div>
+        <label>Enter period in months: <form:input path="period"/></label>
     </div>
     <input type="submit" value="Save">
 </form:form>

@@ -5,7 +5,7 @@
     <title>Trainer add</title>
 </head>
 <body>
-<form:form modelAttribute="user" method="post" action="/admin/addTrainer">
+<form:form modelAttribute="trainer" method="post" action="/admin/addTrainer">
     <form:hidden path="id"/>
     <div>
         <label>Enter Your email: <form:input path="username"/></label>

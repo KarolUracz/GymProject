@@ -31,7 +31,7 @@ public class User {
     private String email;
     private String address;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Pass> pass;
+    private Set<Pass> passes;
 
     @PrePersist
     public void prePersist() {

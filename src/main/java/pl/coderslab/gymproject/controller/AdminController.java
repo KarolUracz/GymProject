@@ -4,9 +4,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.entity.Pass;
+import pl.coderslab.gymproject.entity.PassType;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.PassService;
+import pl.coderslab.gymproject.interfaces.PassTypeService;
 import pl.coderslab.gymproject.interfaces.RoleService;
 import pl.coderslab.gymproject.interfaces.UserService;
 
@@ -19,11 +21,13 @@ public class AdminController {
     private UserService userService;
     private RoleService roleService;
     private PassService passService;
+    private PassTypeService passTypeService;
 
-    public AdminController(UserService userService, RoleService roleService, PassService passService) {
+    public AdminController(UserService userService, RoleService roleService, PassService passService, PassTypeService passTypeService) {
         this.userService = userService;
         this.roleService = roleService;
         this.passService = passService;
+        this.passTypeService = passTypeService;
     }
 
     @GetMapping("/panel")
@@ -73,13 +77,13 @@ public class AdminController {
 
     @GetMapping("/addPass")
     public String addPass(Model model){
-        model.addAttribute("pass", new Pass());
+        model.addAttribute("passType", new PassType());
         return "/admin/addPass";
     }
 
     @PostMapping("/addPass")
-    public String addPass(@ModelAttribute Pass pass) {
-        passService.savePass(pass);
+    public String addPass(@ModelAttribute PassType passType) {
+        passTypeService.savePass(passType);
         return "redirect:/admin/panel";
     }
 
@@ -116,5 +120,10 @@ public class AdminController {
     public String deletePass(@PathVariable long id){
         passService.delete(id);
         return "redirect:/admin/panel";
+    }
+
+    @ModelAttribute(name = "passTypes")
+    public List<PassType> passTypes(){
+        return passTypeService.getAll();
     }
 }
