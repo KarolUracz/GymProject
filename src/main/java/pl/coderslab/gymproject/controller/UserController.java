@@ -15,8 +15,8 @@ import pl.coderslab.gymproject.interfaces.UserService;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -64,7 +64,7 @@ public class UserController {
         pass.setEndDate(now.plus(byId.getPeriod(), ChronoUnit.MONTHS));
         pass.setUser(currentUser.getUser());
         passService.savePass(pass);
-        currentUser.getUser().setPasses(new HashSet<>(Arrays.asList(pass)));
+        currentUser.getUser().setPasses(new ArrayList<>(Arrays.asList(pass)));
         model.addAttribute("user", currentUser.getUser());
         return "redirect:/user/panel";
     }

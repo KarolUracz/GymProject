@@ -48,6 +48,9 @@
 </table>
 <p><a href="/admin/addPass">Add pass</a></p>
 <p><a href="/admin/addAdmin">Add admin</a></p>
+<p><a href="/admin/showTrainers">Show all trainers</a></p>
 <p><a href="/admin/addTrainer">Add trainer</a></p>
+<p><a href="/admin/addTraining">Add training</a></p>
+<p><a href="/admin/trainings">Show trainings</a></p>
 </body>
 </html>

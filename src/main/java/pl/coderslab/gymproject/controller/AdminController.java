@@ -3,31 +3,30 @@ package pl.coderslab.gymproject.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.gymproject.entity.Pass;
-import pl.coderslab.gymproject.entity.PassType;
-import pl.coderslab.gymproject.entity.Role;
-import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.interfaces.PassService;
-import pl.coderslab.gymproject.interfaces.PassTypeService;
-import pl.coderslab.gymproject.interfaces.RoleService;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.entity.*;
+import pl.coderslab.gymproject.interfaces.*;
 
+import java.time.DayOfWeek;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 
-    private UserService userService;
-    private RoleService roleService;
-    private PassService passService;
-    private PassTypeService passTypeService;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final PassService passService;
+    private final PassTypeService passTypeService;
+    private final TrainingService trainingService;
 
-    public AdminController(UserService userService, RoleService roleService, PassService passService, PassTypeService passTypeService) {
+    public AdminController(UserService userService, RoleService roleService, PassService passService, PassTypeService passTypeService, TrainingService trainingService) {
         this.userService = userService;
         this.roleService = roleService;
         this.passService = passService;
         this.passTypeService = passTypeService;
+        this.trainingService = trainingService;
     }
 
     @GetMapping("/panel")
@@ -125,5 +124,49 @@ public class AdminController {
     @ModelAttribute(name = "passTypes")
     public List<PassType> passTypes(){
         return passTypeService.getAll();
+    }
+
+    @GetMapping("/showTrainers")
+    public String showTrainers(){
+        return "/admin/trainers";
+    }
+
+    @ModelAttribute(name = "trainers")
+    public List<User> trainers(){
+        return userService.findAllByRolesN_NameLike("ROLE_TRAINER");
+    }
+
+    @GetMapping("/addTraining")
+    public String addTraining(Model model){
+        model.addAttribute("training", new Training());
+        return "/admin/addTraining";
+    }
+
+    @PostMapping("/addTraining")
+    public String addTraining(@ModelAttribute Training training){
+        trainingService.save(training);
+        return "redirect:/admin/panel";
+    }
+
+    @ModelAttribute(name = "days")
+    public List<DayOfWeek> getDays(){
+        return new ArrayList<>(Arrays.asList(DayOfWeek.MONDAY, DayOfWeek.TUESDAY, DayOfWeek.WEDNESDAY,DayOfWeek.THURSDAY,
+                DayOfWeek.FRIDAY, DayOfWeek.SATURDAY, DayOfWeek.SUNDAY));
+    }
+
+    @GetMapping("/trainings")
+    public String showTrainings(){
+        return "/admin/trainings";
+    }
+
+    @ModelAttribute(name = "trainings")
+    public List<Training> trainings(){
+        return trainingService.getAll();
+    }
+
+    @GetMapping("/deleteTraining/{id}")
+    public String deleteTraining(@PathVariable long id) {
+        trainingService.delete(id);
+        return "redirect:/admin/trainings";
     }
 }

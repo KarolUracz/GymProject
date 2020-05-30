@@ -12,6 +12,8 @@ import pl.coderslab.gymproject.repository.UserRepository;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
@@ -61,6 +63,7 @@ public class UserServiceImpl implements UserService{
     public void updateUser(User user) {
         User userFromDb = userRepository.getOne(user.getId());
         user.setPassword(userFromDb.getPassword());
+        user.setRoles(userFromDb.getRoles());
         userRepository.save(user);
     }
 
@@ -92,6 +95,12 @@ public class UserServiceImpl implements UserService{
         }
         userRepository.save(user);
     }
+
+    @Override
+    public List<User> findAllByRolesN_NameLike(String role) {
+        return findAll().stream().filter(user -> user.getRoles().contains(roleRepository.findOneByName("ROLE_TRAINER"))).collect(Collectors.toList());
+    }
+
 
 //    @Override
 //    public void extendPass(long userId, long passId) {

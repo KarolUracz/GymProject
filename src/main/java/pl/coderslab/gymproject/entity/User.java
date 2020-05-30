@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,7 +32,7 @@ public class User {
     private String email;
     private String address;
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private Set<Pass> passes;
+    private List<Pass> passes;
 
     @PrePersist
     public void prePersist() {
