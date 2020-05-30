@@ -22,6 +22,5 @@ public interface UserService {
 
     void saveTrainer(User user);
 
-    //    void extendPass(long id);
     List<User> findAllByRolesN_NameLike(String role);
 }

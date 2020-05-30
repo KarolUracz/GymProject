@@ -2,10 +2,12 @@ package pl.coderslab.gymproject.service;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Training;
+import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.TrainingService;
 import pl.coderslab.gymproject.repository.TrainingRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TrainingServiceImpl implements TrainingService {
@@ -29,5 +31,18 @@ public class TrainingServiceImpl implements TrainingService {
     @Override
     public void delete(long id) {
         trainingRepository.delete(trainingRepository.getOne(id));
+    }
+
+    @Override
+    public void update(User user, Training training) {
+        Set<User> participants = training.getParticipants();
+        participants.add(user);
+        training.setParticipants(participants);
+        trainingRepository.save(training);
+    }
+
+    @Override
+    public Training findById(long id) {
+        return trainingRepository.findById(id).orElse(null);
     }
 }

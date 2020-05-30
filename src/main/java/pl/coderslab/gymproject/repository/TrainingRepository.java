@@ -6,4 +6,5 @@ import pl.coderslab.gymproject.entity.Training;
 
 @Repository
 public interface TrainingRepository extends JpaRepository<Training, Long> {
+
 }

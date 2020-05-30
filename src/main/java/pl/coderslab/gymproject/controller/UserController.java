@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.Pass;
 import pl.coderslab.gymproject.entity.PassType;
+import pl.coderslab.gymproject.entity.Training;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.fixture.InitDataFixture;
 import pl.coderslab.gymproject.interfaces.PassService;
 import pl.coderslab.gymproject.interfaces.PassTypeService;
+import pl.coderslab.gymproject.interfaces.TrainingService;
 import pl.coderslab.gymproject.interfaces.UserService;
 
 import java.time.LocalDate;
@@ -24,16 +26,17 @@ import java.util.List;
 public class UserController {
 
     private final InitDataFixture initDataFixture;
-
     private UserService userService;
     private PassService passService;
     private PassTypeService passTypeService;
+    private TrainingService trainingService;
 
-    public UserController(InitDataFixture initDataFixture, UserService userService, PassService passService, PassTypeService passTypeService) {
+    public UserController(InitDataFixture initDataFixture, UserService userService, PassService passService, PassTypeService passTypeService, TrainingService trainingService) {
         this.initDataFixture = initDataFixture;
         this.userService = userService;
         this.passService = passService;
         this.passTypeService = passTypeService;
+        this.trainingService = trainingService;
     }
 
 
@@ -74,11 +77,16 @@ public class UserController {
         return LocalDate.now();
     }
 
-    @GetMapping("/extendPass/{userId}/{passId}")
-    public String extendPass(@PathVariable long userId, @PathVariable long passId) {
-
-
-        return "";
+    @ModelAttribute(name = "trainings")
+    public List<Training> trainings(){
+        return trainingService.getAll();
     }
 
+    @GetMapping("/participate/{userId}/{trainingId}")
+    public String participateInTraining(@PathVariable long userId, @PathVariable long trainingId,
+                                        @AuthenticationPrincipal CurrentUser currentUser, Model model) {
+        trainingService.update(userService.findById(userId), trainingService.findById(trainingId));
+        model.addAttribute("user", currentUser);
+        return "/user/panel";
+    }
 }
