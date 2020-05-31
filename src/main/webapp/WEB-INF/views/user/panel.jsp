@@ -66,7 +66,9 @@
         </c:forEach>
     </tr>
 </table>
-
+<c:forEach items="${userTrainings}" var="userTraining">
+    ${userTraining.id}
+</c:forEach>
 
 </body>
 </html>

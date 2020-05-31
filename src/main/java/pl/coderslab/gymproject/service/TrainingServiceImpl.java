@@ -45,4 +45,9 @@ public class TrainingServiceImpl implements TrainingService {
     public Training findById(long id) {
         return trainingRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Training> findByUser(long userId) {
+        return trainingRepository.findByUser(userId);
+    }
 }

@@ -4,12 +4,15 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.fixture.InitDataFixture;
 import pl.coderslab.gymproject.interfaces.RoleService;
 import pl.coderslab.gymproject.interfaces.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 public class HomeController {
@@ -45,7 +48,10 @@ public class HomeController {
     }
 
     @PostMapping("/form")
-    public String save(@ModelAttribute User user) {
+    public String save(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "userForm";
+        }
         user.setEnabled(1);
         userService.saveUser(user);
         return "redirect:/";

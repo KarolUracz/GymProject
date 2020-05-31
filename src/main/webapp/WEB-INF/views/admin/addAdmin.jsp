@@ -35,7 +35,7 @@
         <form:errors path="password"/>
     </div>
     <div>
-        <label>Set role: <form:select path="roles" items="${roles}" itemLabel="name" itemValue="id"/></label>
+        <label>Set role: <form:select path="roles" items="${roles}" itemLabel="name" itemValue="id" multiple="false"/></label>
     </div>
     <input type="submit" value="Confirm">
 </form:form>

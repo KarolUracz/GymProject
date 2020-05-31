@@ -11,5 +11,5 @@ public interface TrainingService {
     void delete(long id);
     void update(User user, Training training);
     Training findById(long id);
-
+    List<Training> findByUser(long userId);
 }

@@ -2,10 +2,12 @@ package pl.coderslab.gymproject.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.entity.*;
 import pl.coderslab.gymproject.interfaces.*;
 
+import javax.validation.Valid;
 import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +53,10 @@ public class AdminController {
     }
 
     @PostMapping("/addUser")
-    public String save(@ModelAttribute User user){
+    public String save(@Valid @ModelAttribute User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "/admin/adduser";
+        }
         userService.saveUser(user);
         return "redirect:/admin/panel";
     }
@@ -63,7 +68,10 @@ public class AdminController {
     }
 
     @PostMapping("/edit")
-    public String edit(@ModelAttribute User user){
+    public String edit(@Valid @ModelAttribute User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "/editUser";
+        }
         userService.updateUser(user);
         return "redirect:/admin/panel";
     }
@@ -81,7 +89,10 @@ public class AdminController {
     }
 
     @PostMapping("/addPass")
-    public String addPass(@ModelAttribute PassType passType) {
+    public String addPass(@Valid @ModelAttribute PassType passType, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "/admin/addPass";
+        }
         passTypeService.savePass(passType);
         return "redirect:/admin/panel";
     }
@@ -93,7 +104,10 @@ public class AdminController {
     }
 
     @PostMapping("/addAdmin")
-    public String addAdmin(@ModelAttribute User user) {
+    public String addAdmin(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()){
+            return "/admin/addAdmin";
+        }
         userService.saveAdmin(user);
         return "redirect:/admin/panel";
     }
@@ -105,7 +119,10 @@ public class AdminController {
     }
 
     @PostMapping("/addTrainer")
-    public String addTrainer(@ModelAttribute User user){
+    public String addTrainer(@Valid @ModelAttribute User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "/admin/addTrainer";
+        }
         userService.saveTrainer(user);
         return "redirect:/admin/panel";
     }
@@ -143,7 +160,10 @@ public class AdminController {
     }
 
     @PostMapping("/addTraining")
-    public String addTraining(@ModelAttribute Training training){
+    public String addTraining(@Valid @ModelAttribute Training training, BindingResult bindingResult){
+        if (bindingResult.hasErrors()){
+            return "/admin/addTraining";
+        }
         trainingService.save(training);
         return "redirect:/admin/panel";
     }

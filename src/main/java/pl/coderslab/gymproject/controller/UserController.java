@@ -87,6 +87,12 @@ public class UserController {
                                         @AuthenticationPrincipal CurrentUser currentUser, Model model) {
         trainingService.update(userService.findById(userId), trainingService.findById(trainingId));
         model.addAttribute("user", currentUser);
+        model.addAttribute("userTrainings", trainingService.findByUser(userId));
         return "/user/panel";
     }
+//
+//    @ModelAttribute(name = "userTrainings")
+//    public List<Training> userTrainings(CurrentUser currentUser){
+//        return trainingService.findByUser(currentUser.getUser().getId());
+//    }
 }
