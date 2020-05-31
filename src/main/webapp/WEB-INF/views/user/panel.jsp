@@ -28,8 +28,8 @@
                 <td>${pass.endDate}</td>
                 <td>
                     <c:if test="${pass.endDate gt now}"><a
-                            href="/user/extendPass/${user.user.id}/${pass.id}">Extend</a></c:if>
-                    <c:if test="${pass.endDate lt now}"><a href="/user/buyPass/${user.user.id}">Buy</a></c:if>
+                            href="/user/extendPass">Extend</a></c:if>
+                    <c:if test="${pass.endDate lt now}">${user.user.passes.removeAll()}</c:if>
                 </td>
             </c:forEach>
         </tr>

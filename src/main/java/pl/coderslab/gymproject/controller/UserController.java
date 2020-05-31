@@ -90,9 +90,24 @@ public class UserController {
         model.addAttribute("userTrainings", trainingService.findByUser(userId));
         return "/user/panel";
     }
-//
-//    @ModelAttribute(name = "userTrainings")
-//    public List<Training> userTrainings(CurrentUser currentUser){
-//        return trainingService.findByUser(currentUser.getUser().getId());
-//    }
+
+    @GetMapping("/extendPass")
+    public String extendPass(@AuthenticationPrincipal CurrentUser currentUser, Model model){
+        model.addAttribute("passExtend", passTypeService.getAll());
+        return "extendPass";
+    }
+
+    @GetMapping("/extendPass/{passId}")
+    public String extendPass(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable long passId){
+        User user = currentUser.getUser();
+        PassType byId = passTypeService.findById(passId);
+        List<Pass> passes = user.getPasses();
+        Pass pass = passes.get(passes.size() - 1);
+        passes.remove(pass);
+        pass.setEndDate(pass.getEndDate().plus(byId.getPeriod(), ChronoUnit.MONTHS));
+        passes.add(pass);
+        user.setPasses(passes);
+        userService.updateUser(user);
+        return "redirect:/user/panel";
+    }
 }
