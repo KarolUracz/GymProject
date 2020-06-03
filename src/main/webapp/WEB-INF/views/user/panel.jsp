@@ -66,8 +66,9 @@
         </c:forEach>
     </tr>
 </table>
+<h4>You have signed for those trainings:</h4>
 <c:forEach items="${userTrainings}" var="userTraining">
-    ${userTraining.id}
+    ${userTraining.id} ${userTraining.dayOfWeek} ${userTraining.startHour} ${userTraining.trainer.username}
 </c:forEach>
 
 </body>

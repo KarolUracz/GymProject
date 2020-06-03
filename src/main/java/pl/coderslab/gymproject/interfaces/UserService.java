@@ -23,4 +23,6 @@ public interface UserService {
     void saveTrainer(User user);
 
     List<User> findAllByRolesN_NameLike(String role);
+
+//    void changePassword(CurrentUser currentUser, User user);
 }

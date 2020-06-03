@@ -2,6 +2,7 @@ package pl.coderslab.gymproject.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.UserService;
@@ -14,8 +15,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/*TODO: sprawdzanie czy uzytkownik sie juz nie zapisal na zajecia, usuwanie uzytkownika - zamiast delete set enabled na 0,
+TODO: rezerwacja treningow personalnych - encja dla trenera, powiadomienia sms, dodac platnosc (przekierowanie do banku?)
+TODO: podstawowy wyglad aplikacji, zmiana hasla
+ */
+
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
@@ -41,7 +47,7 @@ public class UserServiceImpl implements UserService{
     public void saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
-        if(user.getRoles() == null || user.getRoles().size()==0) {
+        if (user.getRoles() == null || user.getRoles().size() == 0) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findOneByName("ROLE_USER"));
             user.setRoles(roles);
@@ -76,7 +82,7 @@ public class UserServiceImpl implements UserService{
     public void saveAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
-        if(user.getRoles() == null || user.getRoles().size()==0) {
+        if (user.getRoles() == null || user.getRoles().size() == 0) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findOneByName("ROLE_ADMIN"));
             user.setRoles(roles);
@@ -88,7 +94,7 @@ public class UserServiceImpl implements UserService{
     public void saveTrainer(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
-        if(user.getRoles() == null || user.getRoles().size()==0) {
+        if (user.getRoles() == null || user.getRoles().size() == 0) {
             Set<Role> roles = new HashSet<>();
             roles.add(roleRepository.findOneByName("ROLE_TRAINER"));
             user.setRoles(roles);
@@ -101,13 +107,19 @@ public class UserServiceImpl implements UserService{
         return findAll().stream().filter(user -> user.getRoles().contains(roleRepository.findOneByName("ROLE_TRAINER"))).collect(Collectors.toList());
     }
 
-
 //    @Override
-//    public void extendPass(long userId, long passId) {
-//        User user = userRepository.getOne(userId);
-//        Set<Pass> passes = user.getPasses();
-//        passes.remove(passRepository.getOne(passId));
-//        Pass pass = passRepository.getOne(passId);
-//        pass.;
+//    public void changePassword(CurrentUser currentUser,User user) {
+//        User currUser = currentUser.getUser();
+//        User userFromDb = userRepository.getOne(currUser.getId());
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setFirstName(currentUser.getUser().getFirstName());
+//        user.setUsername(currentUser.getUser().getEmail());
+//        user.setLastName(currentUser.getUser().getLastName());
+//        user.setAddress(currentUser.getUser().getAddress());
+//        user.setEmail(currentUser.getUser().getEmail());
+//        user.setEnabled(1);
+//        user.setPasses(userFromDb.getPasses());
+//        user.setRoles(userFromDb.getRoles());
+//        userRepository.save(user);
 //    }
 }
