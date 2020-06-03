@@ -107,19 +107,19 @@ public class UserServiceImpl implements UserService {
         return findAll().stream().filter(user -> user.getRoles().contains(roleRepository.findOneByName("ROLE_TRAINER"))).collect(Collectors.toList());
     }
 
-//    @Override
-//    public void changePassword(CurrentUser currentUser,User user) {
-//        User currUser = currentUser.getUser();
-//        User userFromDb = userRepository.getOne(currUser.getId());
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        user.setFirstName(currentUser.getUser().getFirstName());
-//        user.setUsername(currentUser.getUser().getEmail());
-//        user.setLastName(currentUser.getUser().getLastName());
-//        user.setAddress(currentUser.getUser().getAddress());
-//        user.setEmail(currentUser.getUser().getEmail());
-//        user.setEnabled(1);
-//        user.setPasses(userFromDb.getPasses());
-//        user.setRoles(userFromDb.getRoles());
-//        userRepository.save(user);
-//    }
+    @Override
+    public void changePassword(CurrentUser currentUser,User user) {
+        User currUser = currentUser.getUser();
+        User userFromDb = userRepository.getOne(currUser.getId());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setFirstName(currentUser.getUser().getFirstName());
+        user.setUsername(currentUser.getUser().getEmail());
+        user.setLastName(currentUser.getUser().getLastName());
+        user.setAddress(currentUser.getUser().getAddress());
+        user.setEmail(currentUser.getUser().getEmail());
+        user.setEnabled(1);
+        user.setPasses(userFromDb.getPasses());
+        user.setRoles(userFromDb.getRoles());
+        userRepository.save(user);
+    }
 }

@@ -1,5 +1,6 @@
 package pl.coderslab.gymproject.interfaces;
 
+import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.User;
 
 import java.util.List;
@@ -24,5 +25,5 @@ public interface UserService {
 
     List<User> findAllByRolesN_NameLike(String role);
 
-//    void changePassword(CurrentUser currentUser, User user);
+    void changePassword(CurrentUser currentUser, User user);
 }

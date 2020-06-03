@@ -111,15 +111,15 @@ public class UserController {
         return "redirect:/user/panel";
     }
 
-//    @GetMapping("/changePassword")
-//    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model){
-//        model.addAttribute("user", currentUser.getUser());
-//        return "/user/changePassword";
-//    }
+    @GetMapping("/changePassword")
+    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, Model model){
+        model.addAttribute("user", currentUser.getUser());
+        return "/user/changePassword";
+    }
 
-//    @PostMapping("/changePassword")
-//    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute User user){
-//        userService.changePassword(currentUser, user);
-//        return "redirect:/user/panel";
-//    }
+    @PostMapping("/changePassword")
+    public String changePassword(@AuthenticationPrincipal CurrentUser currentUser, @ModelAttribute User user){
+        userService.changePassword(currentUser, user);
+        return "redirect:/user/panel";
+    }
 }

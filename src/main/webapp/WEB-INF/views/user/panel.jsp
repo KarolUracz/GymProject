@@ -7,7 +7,7 @@
     <title>User panel</title>
 </head>
 <body>
-<p> You are logged as: ${user.user.firstName} <a href="/user/edit/${user.user.id}">Edit</a></p>
+<p> You are logged as: ${user.user.firstName} <a href="/user/edit/${user.user.id}">Edit</a> <a href="/user/changePassword">Change password</a></p>
 <nav>
     <sec:authorize access="isAuthenticated()">
         <form action="<c:url value="/logout"/>" method="post">
