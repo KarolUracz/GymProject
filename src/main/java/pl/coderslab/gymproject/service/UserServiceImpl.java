@@ -75,7 +75,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(long id) {
-        userRepository.deleteById(id);
+        User fromDb = userRepository.getOne(id);
+        fromDb.setEnabled(0);
+        userRepository.save(fromDb);
     }
 
     @Override
