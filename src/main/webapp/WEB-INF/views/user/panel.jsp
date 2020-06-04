@@ -56,12 +56,14 @@
             <td>${training.startHour}</td>
             <td>${training.trainer.username}</td>
             <td>
+                <c:if test="${training.participants.contains(user) == false}">
                     <c:if test="${training.participants.size() < 20}">
                         <a href="/user/participate/${user.user.id}/${training.id}">Participate</a>
                     </c:if>
                     <c:if test="${training.participants.size() >= 20}">
                         End of registration
                     </c:if>
+                </c:if>
             </td>
         </c:forEach>
     </tr>

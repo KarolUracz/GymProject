@@ -19,6 +19,7 @@
         <th>Last name</th>
         <th>Username/email</th>
         <th>Roles</th>
+        <th>Enabled</th>
         <th>Actions</th>
     </tr>
 <c:forEach items="${users}" var="user">
@@ -27,6 +28,7 @@
         <td>${user.lastName}</td>
         <td>${user.username}</td>
         <td><c:forEach items="${user.roles}" var="role">${role.name}</c:forEach></td>
+        <td>${user.enabled}</td>
         <td><a href="/admin/edit/${user.id}">Edit</a></td>
         <td><a href="/admin/delete/${user.id}">Delete</a></td>
     </tr>
