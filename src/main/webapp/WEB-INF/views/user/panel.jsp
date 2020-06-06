@@ -7,7 +7,8 @@
     <title>User panel</title>
 </head>
 <body>
-<p> You are logged as: ${user.user.firstName} <a href="/user/edit/${user.user.id}">Edit</a> <a href="/user/changePassword">Change password</a></p>
+<p> You are logged as: ${user.user.firstName} <a href="/user/edit/${user.user.id}">Edit</a> <a
+        href="/user/changePassword">Change password</a></p>
 <nav>
     <sec:authorize access="isAuthenticated()">
         <form action="<c:url value="/logout"/>" method="post">
@@ -56,13 +57,13 @@
             <td>${training.startHour}</td>
             <td>${training.trainer.username}</td>
             <td>
-                <c:if test="${training.participants.contains(user) == false}">
-                    <c:if test="${training.participants.size() < 20}">
+                <c:if test="${training.participants.size() < 20}">
+                    <c:if test="${!training.participants.contains(user.user)}">
                         <a href="/user/participate/${user.user.id}/${training.id}">Participate</a>
                     </c:if>
-                    <c:if test="${training.participants.size() >= 20}">
-                        End of registration
-                    </c:if>
+                </c:if>
+                <c:if test="${training.participants.size() >= 20}">
+                    End of registration
                 </c:if>
             </td>
         </c:forEach>

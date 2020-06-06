@@ -6,4 +6,5 @@ import pl.coderslab.gymproject.entity.PassType;
 
 @Repository
 public interface PassTypeRepository extends JpaRepository<PassType, Long> {
+    PassType findById(long passId);
 }

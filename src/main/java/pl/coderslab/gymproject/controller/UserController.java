@@ -16,7 +16,6 @@ import pl.coderslab.gymproject.interfaces.TrainingService;
 import pl.coderslab.gymproject.interfaces.UserService;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,15 +58,8 @@ public class UserController {
 
     @GetMapping("/getPass/{id}")
     public String getPass(@PathVariable long id, @AuthenticationPrincipal CurrentUser currentUser, Model model){
-        PassType byId = passTypeService.findById(id);
-        LocalDate now = LocalDate.now();
-        Pass pass = new Pass();
-        pass.setPassType(byId);
-        pass.setStartDate(now);
-        pass.setEndDate(now.plus(byId.getPeriod(), ChronoUnit.MONTHS));
-        pass.setUser(currentUser.getUser());
-        passService.savePass(pass);
-        currentUser.getUser().setPasses(new ArrayList<>(Arrays.asList(pass)));
+        Pass passFromService = userService.getPass(currentUser, id);
+        currentUser.getUser().setPasses(new ArrayList<>(Arrays.asList(passFromService)));
         model.addAttribute("user", currentUser.getUser());
         return "redirect:/user/panel";
     }
@@ -99,15 +91,7 @@ public class UserController {
 
     @GetMapping("/extendPass/{passId}")
     public String extendPass(@AuthenticationPrincipal CurrentUser currentUser, @PathVariable long passId){
-        User user = currentUser.getUser();
-        PassType byId = passTypeService.findById(passId);
-        List<Pass> passes = user.getPasses();
-        Pass pass = passes.get(passes.size() - 1);
-        passes.remove(pass);
-        pass.setEndDate(pass.getEndDate().plus(byId.getPeriod(), ChronoUnit.MONTHS));
-        passes.add(pass);
-        user.setPasses(passes);
-        userService.updateUser(user);
+        userService.extendPass(currentUser, passId);
         return "redirect:/user/panel";
     }
 

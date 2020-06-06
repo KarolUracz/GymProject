@@ -3,22 +3,22 @@ package pl.coderslab.gymproject.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.Model.CurrentUser;
+import pl.coderslab.gymproject.entity.Pass;
+import pl.coderslab.gymproject.entity.PassType;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.interfaces.UserService;
 import pl.coderslab.gymproject.repository.PassRepository;
+import pl.coderslab.gymproject.repository.PassTypeRepository;
 import pl.coderslab.gymproject.repository.RoleRepository;
 import pl.coderslab.gymproject.repository.UserRepository;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-/*TODO: sprawdzanie czy uzytkownik sie juz nie zapisal na zajecia, usuwanie uzytkownika - zamiast delete set enabled na 0,
-TODO: rezerwacja treningow personalnych - encja dla trenera, powiadomienia sms, dodac platnosc (przekierowanie do banku?)
-TODO: podstawowy wyglad aplikacji, zmiana hasla
- */
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,16 +26,18 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final PassRepository passRepository;
+    private final PassTypeRepository passTypeRepository;
 
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
             BCryptPasswordEncoder passwordEncoder,
-            PassRepository passRepository) {
+            PassRepository passRepository, PassTypeRepository passTypeRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passRepository = passRepository;
+        this.passTypeRepository = passTypeRepository;
     }
 
     @Override
@@ -123,5 +125,32 @@ public class UserServiceImpl implements UserService {
         user.setPasses(userFromDb.getPasses());
         user.setRoles(userFromDb.getRoles());
         userRepository.save(user);
+    }
+
+    @Override
+    public void extendPass(CurrentUser currentUser, long passId) {
+        User user = currentUser.getUser();
+        PassType byId = passTypeRepository.findById(passId);
+        List<Pass> passes = user.getPasses();
+        Pass pass = passes.get(passes.size() - 1);
+        passes.remove(pass);
+        pass.setEndDate(pass.getEndDate().plus(byId.getPeriod(), ChronoUnit.MONTHS));
+        passes.add(pass);
+        passRepository.save(pass);
+        user.setPasses(passes);
+        userRepository.save(user);
+    }
+
+    @Override
+    public Pass getPass(CurrentUser currentUser, long passId) {
+        PassType byId = passTypeRepository.findById(passId);
+        LocalDate now = LocalDate.now();
+        Pass pass = new Pass();
+        pass.setPassType(byId);
+        pass.setStartDate(now);
+        pass.setEndDate(now.plus(byId.getPeriod(), ChronoUnit.MONTHS));
+        pass.setUser(currentUser.getUser());
+        passRepository.save(pass);
+        return pass;
     }
 }
