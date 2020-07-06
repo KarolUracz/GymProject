@@ -4,7 +4,7 @@ The goal of the project is to create an application that allows to manage fitnes
 
 Run on your device
 
-If you want to check this project, you have to add new DB (MySQL) 'gymproject' or else if You want and modify application.properties file to manage Your connection.
+If you want to check this project, you have to add new DB (MySQL) 'gymproject' (or else) and modify application.properties file to manage Your connection.
 
 Technologies
 
