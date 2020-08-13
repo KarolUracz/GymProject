@@ -1,4 +1,4 @@
-package pl.coderslab.gymproject.service;
+package pl.coderslab.gymproject.service.impl;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import pl.coderslab.gymproject.entity.Pass;
 import pl.coderslab.gymproject.entity.PassType;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.service.UserService;
 import pl.coderslab.gymproject.repository.PassRepository;
 import pl.coderslab.gymproject.repository.PassTypeRepository;
 import pl.coderslab.gymproject.repository.RoleRepository;

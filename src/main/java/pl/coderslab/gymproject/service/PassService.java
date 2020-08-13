@@ -1,4 +1,4 @@
-package pl.coderslab.gymproject.interfaces;
+package pl.coderslab.gymproject.service;
 
 import pl.coderslab.gymproject.entity.Pass;
 

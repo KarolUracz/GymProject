@@ -1,4 +1,4 @@
-package pl.coderslab.gymproject.service;
+package pl.coderslab.gymproject.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;
