@@ -29,7 +29,7 @@ public class PassTypeServiceImpl implements PassTypeService {
 
     @Override
     public PassType findById(long id) {
-        return this.passTypeRepository.findById(id).orElse(null);
+        return this.passTypeRepository.getOne(id);
     }
 
     @Override
