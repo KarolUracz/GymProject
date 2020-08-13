@@ -41,8 +41,11 @@ public class InitDataFixture {
         adminRoles.add(roleService.findOneByName("ROLE_ADMIN"));
 
         User admin = new User();
-        admin.setUsername("admin");
+        admin.setUsername("admin@admin");
         admin.setPassword("admin");
+        admin.setFirstName("admin");
+        admin.setLastName("admin");
+        admin.setAddress("admin");
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
 
@@ -50,8 +53,11 @@ public class InitDataFixture {
         userRoles.add(roleService.findOneByName("ROLE_USER"));
 
         User user = new User();
-        user.setUsername("user");
+        user.setUsername("user@user");
         user.setPassword("user");
+        user.setFirstName("user");
+        user.setLastName("user");
+        user.setAddress("user");
         user.setRoles(userRoles);
 
         userService.saveUser(user);
@@ -60,8 +66,11 @@ public class InitDataFixture {
         trainerRoles.add(roleService.findOneByName("ROLE_TRAINER"));
 
         User trainer = new User();
-        trainer.setUsername("trainer");
+        trainer.setUsername("trainer@trainer");
         trainer.setPassword("trainer");
+        trainer.setFirstName("trainer");
+        trainer.setLastName("trainer");
+        trainer.setAddress("trainer");
         trainer.setRoles(trainerRoles);
 
         userService.saveUser(trainer);

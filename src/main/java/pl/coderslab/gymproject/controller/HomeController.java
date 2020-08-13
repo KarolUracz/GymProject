@@ -27,14 +27,14 @@ public class HomeController {
         this.roleService = roleService;
     }
 
-//    @GetMapping("/initData")
-//    @ResponseBody
-//    public String createUser() {
-//
-//        this.initDataFixture.initRoles();
-//        this.initDataFixture.initUsers();
-//        return "initialized";
-//    }
+    @GetMapping("/initData")
+    @ResponseBody
+    public String createUser() {
+
+        this.initDataFixture.initRoles();
+        this.initDataFixture.initUsers();
+        return "initialized";
+    }
 
     @GetMapping("/")
     public String home() {
