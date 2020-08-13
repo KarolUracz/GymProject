@@ -1,8 +1,8 @@
-package pl.coderslab.gymproject.service;
+package pl.coderslab.gymproject.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.PassType;
-import pl.coderslab.gymproject.interfaces.PassTypeService;
+import pl.coderslab.gymproject.service.PassTypeService;
 import pl.coderslab.gymproject.repository.PassTypeRepository;
 
 import java.util.List;

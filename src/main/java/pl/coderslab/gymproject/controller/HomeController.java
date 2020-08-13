@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.gymproject.Model.CurrentUser;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.fixture.InitDataFixture;
-import pl.coderslab.gymproject.interfaces.RoleService;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.service.RoleService;
+import pl.coderslab.gymproject.service.UserService;
 
 import javax.validation.Valid;
 

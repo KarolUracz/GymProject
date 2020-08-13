@@ -1,9 +1,9 @@
-package pl.coderslab.gymproject.service;
+package pl.coderslab.gymproject.service.impl;
 
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Training;
 import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.interfaces.TrainingService;
+import pl.coderslab.gymproject.service.TrainingService;
 import pl.coderslab.gymproject.repository.TrainingRepository;
 
 import java.util.List;

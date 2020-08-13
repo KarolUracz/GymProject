@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Role;
 import pl.coderslab.gymproject.entity.User;
-import pl.coderslab.gymproject.interfaces.RoleService;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.service.RoleService;
+import pl.coderslab.gymproject.service.UserService;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -10,10 +10,10 @@ import pl.coderslab.gymproject.entity.PassType;
 import pl.coderslab.gymproject.entity.Training;
 import pl.coderslab.gymproject.entity.User;
 import pl.coderslab.gymproject.fixture.InitDataFixture;
-import pl.coderslab.gymproject.interfaces.PassService;
-import pl.coderslab.gymproject.interfaces.PassTypeService;
-import pl.coderslab.gymproject.interfaces.TrainingService;
-import pl.coderslab.gymproject.interfaces.UserService;
+import pl.coderslab.gymproject.service.PassService;
+import pl.coderslab.gymproject.service.PassTypeService;
+import pl.coderslab.gymproject.service.TrainingService;
+import pl.coderslab.gymproject.service.UserService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

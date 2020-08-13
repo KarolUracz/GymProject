@@ -1,9 +1,9 @@
-package pl.coderslab.gymproject.service;
+package pl.coderslab.gymproject.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.coderslab.gymproject.entity.Role;
-import pl.coderslab.gymproject.interfaces.RoleService;
+import pl.coderslab.gymproject.service.RoleService;
 import pl.coderslab.gymproject.repository.RoleRepository;
 
 import java.util.List;
