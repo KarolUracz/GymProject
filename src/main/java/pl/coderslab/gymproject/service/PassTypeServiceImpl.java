@@ -34,6 +34,6 @@ public class PassTypeServiceImpl implements PassTypeService {
 
     @Override
     public void delete(long id) {
-        this.passTypeRepository.delete(passTypeRepository.findById(id).orElse(null));
+        this.passTypeRepository.delete(passTypeRepository.getOne(id));
     }
 }
