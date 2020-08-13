@@ -15,11 +15,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/*TODO: sprawdzanie czy uzytkownik sie juz nie zapisal na zajecia, usuwanie uzytkownika - zamiast delete set enabled na 0,
-TODO: rezerwacja treningow personalnych - encja dla trenera, powiadomienia sms, dodac platnosc (przekierowanie do banku?)
-TODO: podstawowy wyglad aplikacji, zmiana hasla
- */
-
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
